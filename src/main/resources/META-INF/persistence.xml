@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+    version="2.2">
+    
+    <persistence-unit name="MySQLPU"> 
+      <!-- 
+      Usar se java SE: O java EE percorre todas as classes, mas o java SE não, então o java SE pode não encontrar
+      
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      <class>com.wyk.jpaexample.model.Customer</class>
+      <class>com.wyk.jpaexample.model.CreditCard</class>      
+       -->
+      
+      <!-- 
+      Caso queira extrair o mapeamento das classes
+      <mapping-file>persistence_A.xml</mapping-file>
+      
+      O arquivo persistence_A.xml ficaria assim:
+      
+      <?xml version="1.0" encoding="UTF-8"?>
+      <entity-mappings
+		xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+	    version="2.2">
+	    
+		<entity class="com.wyk.jpaexample.model.Customer"/>
+		<attributes> //Poderia usar no caso de minha entidade estar mapeada com uma variavel chamada 'name', mas no banco ser 'person_name'
+			<basic name="name">
+				<column name="person_name"/>
+			</basic>
+		</attributes>
+		
+	  </entity-mappings>
+       -->
+       
+      <!-- 
+      <mapping-file>queries.xml</mapping-file>
+      
+      <?xml version="1.0" encoding="UTF-8"?>
+      <entity-mappings
+		xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+	    version="2.2">
+	    
+		<named-query name="Customer.ListAll">
+			<query>select p from Customer p</query>
+		</named-query>
+		
+	  </entity-mappings>
+       --> 
+      
+      <!-- 
+      Exclui classes não listadas, geralmente usado para caso tenha mais de um persistence-unit
+      <exclude-unlisted-classes>true</exclude-unlisted-classes> 
+      -->
+	  <properties>
+	    <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/crudcustomer" />
+	    <property name="javax.persistence.jdbc.user" value="root" />
+	    <property name="javax.persistence.jdbc.password" value="123" />
+	    <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+	 
+	    <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+	    
+	    <property name="hibernate.show_sql" value="true" />
+		<property name="hibernate.format_sql" value="true" />
+	    
+	  </properties>
+	</persistence-unit>
+    
+</persistence>
